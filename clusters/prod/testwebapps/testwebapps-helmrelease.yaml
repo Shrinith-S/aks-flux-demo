@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: testwebapps
@@ -7,11 +7,12 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: ./helm/testwebapps
+      chart: testwebapps
       sourceRef:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
+        path: ./helm/testwebapps
   values:
     replicaCount: 2
     image:
