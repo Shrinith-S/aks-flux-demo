@@ -1,15 +1,4 @@
-apiVersion: kustomize.toolkit.fluxcd.io/v1
+apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: testwebapps
-  namespace: flux-system
-spec:
-  interval: 1m
-  path: "./clusters/prod/testwebapps"   # folder containing testwebapps-hr.yaml
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  timeout: 2m
-  wait: true
+resources:
+  - testwebapps-helmrelease.yaml
