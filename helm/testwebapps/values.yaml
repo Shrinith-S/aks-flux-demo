@@ -1,0 +1,30 @@
+replicaCount: 2
+
+image:
+  repository: shrinithdecos/testwebapp01
+  tag: dev-01
+  pullPolicy: IfNotPresent
+
+image2:
+  repository: shrinithdecos/testwebapp02
+  tag: dev-01
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - host: testwebapps.local
+      paths:
+        - path: /app1
+          service: testwebapps-app1-svc
+          port: 80
+        - path: /app2
+          service: testwebapps-app2-svc
+          port: 80
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
